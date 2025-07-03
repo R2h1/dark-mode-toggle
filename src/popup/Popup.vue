@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { toggleTheme, watchThemeChanges, ThemeMode } from '~/modules/theme'
+import { onMounted, ref } from 'vue'
+import { ThemeMode, toggleTheme, watchThemeChanges } from '~/modules/theme'
 
 const currentTheme = ref<ThemeMode>(ThemeMode.LIGHT)
 
@@ -13,18 +13,21 @@ onMounted(() => {
 
 async function handleToggleTheme() {
   await toggleTheme()
+}
 </script>
 
 <template>
   <div class="p-4 w-64">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-xl font-bold">Theme Switcher</h1>
+      <h1 class="text-xl font-bold">
+        Theme Switcher
+      </h1>
       <button
-        @click="handleToggleTheme"
         class="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+        @click="handleToggleTheme"
       >
-        <div class="i-ph-sun-dim-duotone text-xl" v-if="currentTheme === 'light'" />
-        <div class="i-ph-moon-stars-duotone text-xl" v-else />
+        <div v-if="currentTheme === 'light'" class="i-ph-sun-dim-duotone text-xl" />
+        <div v-else class="i-ph-moon-stars-duotone text-xl" />
       </button>
     </div>
   </div>
